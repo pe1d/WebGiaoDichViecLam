@@ -1,0 +1,189 @@
+@{
+    ViewData["Title"] = "Detail";
+}
+<div class="single_job_listing">
+    <div class="page-header">
+        <h1 class="page-title">
+            Front End Developer &#8211; Digital Arts </h1>
+        <h3 class="page-subtitle">
+            <ul class="job-listing-meta meta">
+                <li class="job-type full-time">full-time</li>
+                <li class="location"><a class="google_map_link"
+                        href="https://maps.google.com/maps?q=Markham+Playground%2C+Willow+Road+East%2C+Staten+Island%2C+NY&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false"
+                        target="_blank">, New York</a></li>
+                <li class="date-posted">Posted 3 years ago</li>
+                <li class="job-company">
+                    <a href="../../companies/front%20end%20developer%20%26%238211%3b%20digital%20arts/index.html"
+                        target="_blank">Front End Developer &#8211; Digital Arts</a>
+                </li>
+            </ul>
+        </h3>
+    </div>
+    <div id="content" class="container content-area" role="main">
+        <div class="job-meta-top row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <aside class="widget widget--job_listing widget--job_listing-top"><a
+                        href="../../company/Front%20End%20Developer%20%26%238211%3b%20Digital%20Arts/index.html"
+                        target="_blank"><img class="company_logo"
+                            src="../../wp-content/uploads/sites/5/2021/09/listing-codepen-logo-300x300-1.jpg"
+                            alt="Front End Developer &#8211; Digital Arts" /></a></aside>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <aside class="widget widget--job_listing widget--job_listing-top">
+                    <h3 class="widget-title widget-title--job_listing widget-title--job_listing-top">
+                        Category</h3>
+                    <div class="job_listing-categories"><a href="../../job-category/design/index.html"
+                            class="job-category">Design</a></div>
+                </aside>
+            </div>
+            <div class="col-md-5 col-sm-6 col-xs-12">
+                <aside class="widget widget--job_listing widget--job_listing-top">
+                    <h3 class="widget-title widget-title--job_listing widget-title--job_listing-top">Company
+                        Details</h3>
+                    <ul class="job_listing-company-social company-social">
+
+                        <li><a href="https://www.facebook.com/codepen" target="_blank" class="job_listing-facebook">
+                                Facebook </a></li>
+                    </ul>
+                </aside>
+                <aside class="widget widget--job_listing widget--job_listing-top">
+                    <div class="job_application application">
+                        <input type="button" class="application_button button" value="Apply for job" />
+                        <div class="application_details">
+                            <form class="job-manager-application-form job-manager-form" method="post"
+                                enctype="multipart/form-data"
+                                action="https://jobify-demos.astoundify.com/skin-2/job/frontend-developer/">
+                                <h2 class="modal-title">Apply</h2>
+                                <fieldset class="fieldset-candidate_name">
+                                    <label for="candidate_name">Full name</label>
+                                    <div class="field required-field">
+                                        <input type="text" class="input-text" name="candidate_name" id="candidate_name"
+                                            placeholder="" value="" maxlength="" required />
+                                    </div>
+                                </fieldset>
+                                <fieldset class="fieldset-candidate_email">
+                                    <label for="candidate_email">Email address</label>
+                                    <div class="field required-field">
+                                        <input type="text" class="input-text" name="candidate_email"
+                                            id="candidate_email" placeholder="" value="" maxlength="" required />
+                                    </div>
+                                </fieldset>
+                                <fieldset class="fieldset-application_message">
+                                    <label for="application_message">Message</label>
+                                    <div class="field required-field">
+                                        <textarea cols="20" rows="3" class="input-text" name="application_message"
+                                            id="application_message"
+                                            placeholder="Your cover letter/message sent to the employer" maxlength=""
+                                            required></textarea>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="fieldset-application_attachment">
+                                    <label for="application_attachment">Upload CV
+                                        <small>(optional)</small></label>
+                                    <div class="field ">
+                                        <label for="application_attachment" class="file-field-label">
+                                            <div class="job-manager-uploaded-files">
+                                            </div>
+
+                                            <input type="file" class="input-text listify-file-upload"
+                                                data-file_types="jpg|jpeg|jpe|png|gif|webp|mov|qt|avi|mpeg|mpg|mpe|3gp|3gpp|3g2|3gp2|mid|midi|pdf|doc|docx|docm|pot|pps|ppt|pptx|pptm|odt|ppsx|ppsm|xla|xls|xlt|xlw|xlsx|xlsm|xlsb|key|mp3|m4a|m4b|ogg|oga|flac|wav|mp4|m4v|webm|ogv|flv"
+                                                multiple name="application_attachment[]"
+                                                data-multiple-caption="%d files selected" id="application_attachment"
+                                                placeholder="" />
+
+                                            <span class="button button--size-medium">
+                                                Choose File </span>
+                                        </label>
+
+                                        <small class="description file-field-description">
+                                            Upload your CV/resume or any other relevant file. Max. file
+                                            size: 1 MB. </small>
+                                    </div>
+                                </fieldset>
+                                <p>
+                                    <input type="submit" class="button wp_job_manager_send_application_button"
+                                        value="Send application" />
+                                    <input type="hidden" name="wp_job_manager_send_application" value="1" />
+                                    <input type="hidden" name="job_id" value="90" />
+                                </p>
+                            </form>
+                            <hr />
+                            <form class="apply_with_resume" method="post"
+                                action="https://jobify-demos.astoundify.com/skin-2/job/frontend-developer/">
+                                <p>You can apply to this job and others using your online resume. Click the
+                                    link below to submit your online resume and email your application to
+                                    this employer.</p>
+
+                                <p>
+                                    <input type="submit" name="wp_job_manager_resumes_apply_with_resume_create"
+                                        value="Submit Resume &amp; Apply" />
+                                    <input type="hidden" name="job_id" value="90" />
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        <div class="job-overview-content row">
+            <div class="job_listing-description job-overview col-md-12 col-sm-12">
+                <h2 class="widget-title widget-title--job_listing-top job-overview-title">Overview</h2>
+                <p><img class="alignnone size-full" src="~/wp-content/uploads/sites/5/2021/09/listing-hero-image-3.html"
+                        width="1110" height="342" /></p>
+                <h4>Company Description</h4>
+                <p>Company is a 2016 Iowa City-born start-up that develops consectetuer adipiscing elit.
+                    Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel,
+                    dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor
+                    libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo.
+                    Suspendisse potenti.</p>
+                <h3>Job Description</h3>
+                <p>As Marketing Graphic Designer, your primary responsibility is to assist the Marketing and
+                    Social Media team with a variety of graphic design tasks ranging from email, ads, print,
+                    and website design. You will be responsible to take a set of instructions, or a stated
+                    problem, and produce clean, modern design assets that are within the brand requirements
+                    of our company and our products. As part of the process, this person will collaborate
+                    with members of the marketing, design and product teams to gain a clear understanding of
+                    the campaign expectations, target audience, and product positioning.</p>
+                <p>The right candidate will possess video production and editing skills. You will work with
+                    the marketing and social media team in the video production cycle from pre-production
+                    planning through post-production editing (video training available).</p>
+                <p>For website design, a basic level of coding is required in order to turn designs into
+                    live websites.</p>
+                <h4>Key Objectives</h4>
+                <ul>
+                    <li>Assets that are within the brand requirements of our company and our products.</li>
+                </ul>
+                <h4>Primary Areas of Accountability</h4>
+                <ul>
+                    <li>Collaborate with the Marketing Manager to deliver effective, direct response e-mail
+                        designs for marketing campaigns</li>
+                    <li>Work with stakeholders from sales and marketing to design print materials, including
+                        sales brochures and mailers</li>
+                    <li>Work closely with the CMO and in-house design team, taking direction on our new
+                        website design for corporate and product sites, including writing HTML and CSS</li>
+                    <li>Work closely with the CMO and in-house design team to compile the corporate and
+                        product family branding style guides (icons, color palettes, etc)</li>
+                    <li>Develop design assets for new product launches, including screenshots and icons for
+                        app store listings</li>
+                </ul>
+                <h4>Required Knowledge, Skills, and Abilities</h4>
+                <ul>
+                    <li>Ability to write code &#8211; HTML &amp; CSS (SCSS flavor of SASS preferred when
+                        writing CSS)</li>
+                    <li>Proficient in Photoshop, Illustrator, bonus points for familiarity with Sketch
+                        (Sketch is our preferred concepting tool)</li>
+                    <li>Cross-browser and platform testing as standard practice</li>
+                    <li>Experience using Invision a plus</li>
+                    <li>Experience in video production a plus or, at a minimum, a willingness to learn</li>
+                </ul>
+                <h4>Education + Experience</h4>
+                <ul>
+                    <li>Advanced degree or equivalent experience in graphic and web design</li>
+                    <li>3 or more years of professional design experience</li>
+                    <li>Direct response email experience</li>
+                    <li>Ecommerce website design experience</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
