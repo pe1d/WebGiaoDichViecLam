@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,21 +9,19 @@ using WebGiaoDichViecLam.Models;
 
 namespace WebGiaoDichViecLam.Controllers
 {
-    public class HomeController : Controller
+    public class JobClientController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<JobClientController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public JobClientController(ILogger<JobClientController> logger)
         {
             _logger = logger;
         }
-
-        public IActionResult Index()
+        public IActionResult SearchJob()
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        public IActionResult DetailJob()
         {
             return View();
         }

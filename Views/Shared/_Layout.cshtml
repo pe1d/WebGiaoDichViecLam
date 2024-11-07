@@ -618,7 +618,7 @@
         }
 
         body {
-            padding-top: 110px;
+            @* padding-top: 110px; *@
             font-family: "Varela Round", "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-weight: normal;
             line-height: 1.5;
@@ -741,7 +741,7 @@
 
         .widget-title {
             font-family: "Varela Round", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-weight: normal;
+            font-weight: normal; 
             line-height: 1.3;
         }
 
@@ -805,6 +805,9 @@
             .widget-title {
                 font-size: 22px;
             }
+            .site-main{
+                padding-top: 80px !important;
+                }
         }
     </style>
     <link rel='stylesheet' id='newsletter-css' href='~/wp-content/plugins/newsletter/stylef022.css?ver=7.8.5'
@@ -908,8 +911,11 @@
     </style>
 </head>
 
-<body
-    class="home page-template page-template-elementor_header_footer page page-id-15 theme-jobify woocommerce-no-js single-listing-style-top single-resume-style-top wp-job-manager-categories-enabled wp-job-manager wp-job-manager-resumes wp-job-manager-wc-paid-listings wp-job-manager-tags wp-job-manager-applications ninjaforms-contact-job-form wp-job-manager-contact-listing woocommerce testimonials ninja-forms geo-my-wp custom-font nav-menu-break-large fixed-header jobify-skin-2 elementor-default elementor-template-full-width elementor-kit-8 elementor-page elementor-page-15">
+<body class="home page-template page-template-elementor_header_footer page page-id-15 
+    theme-jobify woocommerce-no-js single-listing-style-top single-resume-style-top wp-job-manager-categories-enabled wp-job-manager wp-job-manager-resumes 
+    wp-job-manager-wc-paid-listings wp-job-manager-tags wp-job-manager-applications ninjaforms-contact-job-form wp-job-manager-contact-listing 
+    woocommerce testimonials ninja-forms geo-my-wp custom-font nav-menu-break-large fixed-header jobify-skin-2 elementor-default 
+    elementor-template-full-width elementor-kit-8 elementor-page elementor-page-15" style="overflow-y: auto;">
     <div id="page" class="hfeed site">
         <header id="masthead" class="site-header" role="banner">
             <div class="container">
@@ -948,19 +954,19 @@
                                     <ul class="sub-menu">
                                         <li id="menu-item-66"
                                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-66">
-                                            <a asp-controller="Home" asp-action="SearchJob">Tìm kiếm việc làm</a>
+                                            <a asp-controller="JobClient" asp-action="SearchJob">Tìm kiếm việc làm</a>
                                         </li>
                                         <li id="menu-item-72"
                                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72">
-                                            <a href="post-a-job/index.html">Việc làm đã ứng tuyển</a>
+                                            <a href="#">Việc làm đã ứng tuyển</a>
                                         </li>
                                         <li id="menu-item-17"
                                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17">
-                                            <a href="companies/index.html">Việc làm đã lưu</a>
+                                            <a href="#">Việc làm đã lưu</a>
                                         </li>
                                         <li id="menu-item-70"
                                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-70">
-                                            <a href="myaccount/manage-jobs/index.html">Danh sách công ty</a>
+                                            <a href="#">Danh sách công ty</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -969,7 +975,8 @@
                                         href="blog/index.html">Bài viết</a></li>
                                 <li id="menu-item-58"
                                     class="register menu-item menu-item-type-post_type menu-item-object-page menu-item-58">
-                                    <a asp-action="SignUp" asp-controller="Account" class="popup-trigger-ajax">Đăng ký</a>
+                                    <a asp-action="SignUp" asp-controller="Account" class="popup-trigger-ajax">Đăng
+                                        ký</a>
                                 </li>
                                 <li id="menu-item-53"
                                     class="login menu-item menu-item-type-post_type menu-item-object-page menu-item-53">
@@ -986,7 +993,7 @@
             </div>
         </header><!-- #masthead -->
 
-        <div id="main" class="site-main">
+        <div id="main" class="site-main" style="padding-top: 0px;">
             @RenderBody()
         </div><!-- #main -->
         <footer id="colophon" class="site-footer  skin-2-footer" role="contentinfo">
