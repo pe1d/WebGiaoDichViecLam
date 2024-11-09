@@ -23,5 +23,15 @@ namespace WebGiaoDichViecLam.Controllers
 		{
 			return View();
 		}
+
+		public IActionResult SignUpUser()
+		{
+			return View();
+		}
+
+		public IActionResult SignUpEmployer()
+		{
+			return View();
+		}
 	}
 }
