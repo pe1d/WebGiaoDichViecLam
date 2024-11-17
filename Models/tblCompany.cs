@@ -12,11 +12,11 @@ namespace WebGiaoDichViecLam.Models
 
         public string sPhotoCompany { get; set; }
 
-        public string iPhoneNumber {  get; set; }
+        public int iPhoneNumber { get; set; }
 
         public string sAddressCompany { get; set; }
 
-            
+
         public int iNumberEmployees { get; set; }
 
         public string sDescriptionCompany { get; set; }
