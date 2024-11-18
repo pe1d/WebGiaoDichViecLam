@@ -973,15 +973,30 @@
                                 <li id="menu-item-33"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33"><a
                                         href="blog/index.html">Bài viết</a></li>
-                                <li id="menu-item-58"
-                                    class="register menu-item menu-item-type-post_type menu-item-object-page menu-item-58">
-                                    <a asp-action="SignUp" asp-controller="Account" class="popup-trigger-ajax">Đăng
-                                        ký</a>
-                                </li>
-                                <li id="menu-item-53"
-                                    class="login menu-item menu-item-type-post_type menu-item-object-page menu-item-53">
-                                    <a asp-action="Login" asp-controller="Account">Đăng nhập</a>
-                                </li>
+                                @if(!User.Identity.IsAuthenticated){
+                                    <li id="menu-item-58"
+                                        class="register menu-item menu-item-type-post_type menu-item-object-page menu-item-58">
+                                        <a asp-action="SignUp" asp-controller="Account" class="popup-trigger-ajax">Đăng
+                                            ký</a>
+                                    </li>
+                                    <li id="menu-item-53"
+                                        class="login menu-item menu-item-type-post_type menu-item-object-page menu-item-53">
+                                        <a asp-action="Login" asp-controller="Account">Đăng nhập</a>
+                                    </li>
+                                }else{
+                                    
+                                    <li id="menu-item-58"
+                                        class="logout menu-item menu-item-type-post_type menu-item-object-page menu-item-58">
+                                        <a asp-action="Logout" asp-controller="Account" class="popup-trigger-ajax">Đăng
+                                            xuất</a>
+                                    </li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                                        <span class="navbar-text mr-2">
+                                            Chào, @User.Identity.Name!
+                                        </span>
+                                    </li> 
+                                }
+                                
                             </ul>
                         </div>
                     </nav>

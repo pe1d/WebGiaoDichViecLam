@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using WebGiaoDichViecLam.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 namespace WebGiaoDichViecLam
 {
     public class Startup
@@ -25,6 +26,17 @@ namespace WebGiaoDichViecLam
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+                options.Cookie.HttpOnly = true; // Security option to prevent client-side access to the cookie
+                options.Cookie.IsEssential = true; // Make the session cookie essential
+            });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/Account/Login"; // Đường dẫn đến trang đăng nhập
+            });
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("strConnect")));
             services.AddRazorPages();
@@ -33,6 +45,7 @@ namespace WebGiaoDichViecLam
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAuthentication();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -45,7 +58,7 @@ namespace WebGiaoDichViecLam
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

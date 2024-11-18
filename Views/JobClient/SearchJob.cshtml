@@ -1,3 +1,4 @@
+@using System.Globalization
 @{
     ViewData["Title"] = "Search";
 }
@@ -16,6 +17,11 @@
         {
             return postedDate.ToString("dd/MM/yyyy");
         }
+    }
+    public static string FormatToVND(double amount)
+    {
+        var culture = new CultureInfo("vi-VN");
+        return string.Format("vi-VN", "{0:C0}", amount);
     }
 }
 <header class="page-header">
@@ -135,11 +141,11 @@
                         {
                             <li class="job_listing job-type-freelance job_position_featured type-job_listing status-publish has-post-thumbnail hentry job_listing_region-new-york job_listing_type-freelance"
                                 data-title="Web Designer at Squarespace" data-href="job/square-web-designer/index.html">
-                                <a asp-controller="JobClient" asp-action="DetailJob" class="job_listing-clickbox"></a>
+                                <a asp-controller="JobClient" asp-action="DetailJob" asp-route-id="@job.iJobID"
+                                    class="job_listing-clickbox"></a>
                                 <div class="job_listing-logo">
-                                    <img class="company_logo"
-                                        src="~/wp-content/uploads/sites/5/2021/09/listing-squarespace-logo-150x150-1-150x150.jpg"
-                                        alt="Web Designer" />
+                                    <img class="company_logo" src="@job.TblCompany.sPhotoCompany"
+                                        alt="@job.sNameJob &#8211; @job.TblCategory.sCategoryName" />
                                 </div>
                                 <div class="job_listing-about">
                                     <div class="job_listing-position job_listing__column">
@@ -151,6 +157,9 @@
                                     </div>
                                     <div class="job_listing-location job_listing__column">
                                         <a class="google_map_link" target="_blank">@job.TblCompany.sAddressCompany</a>
+                                    </div>
+                                    <div class="mb-2" style="color: green; font-size: 15px; font-weight: 600;">
+                                        Lương: ~ @FormatToVND(job.fSalaryJob)
                                     </div>
                                     <ul class="job_listing-meta job_listing__column">
                                         <li class="job_listing-type job-type">@job.sTypeJob

@@ -5,9 +5,9 @@ namespace WebGiaoDichViecLam.Models
     public class tblAccount
     {
         [Key]
-        public int iAccountID { get; set; } 
+        public int iAccountID { get; set; }
 
-  
+
         public string sUserName { get; set; } = null!;
 
 
@@ -16,7 +16,7 @@ namespace WebGiaoDichViecLam.Models
 
         public string sEmailAccount { get; set; } = null!;
 
-        public int FK_iRoleID { get; set; } 
+        public int iRoleID { get; set; }
 
 
 
