@@ -27,11 +27,11 @@ namespace WebGiaoDichViecLam.Controllers
         [HttpGet]
         public async Task<IActionResult> CategoryManage()
         {
-            var category = _context.tblCategory.ToList();
+            var category = await _context.tblCategory.ToListAsync();
             return View(category);
         }
 
-  
+
 
         [HttpGet]
         public async Task<IActionResult> AddCategoryJob()
@@ -63,7 +63,7 @@ namespace WebGiaoDichViecLam.Controllers
                     _context.tblCategory.Add(category);
                     await _context.SaveChangesAsync();
 
-                   
+
                     return RedirectToAction("CategoryManage"); // Chuyển hướng sau khi thêm thành công
                 }
                 catch (DbUpdateException ex)
