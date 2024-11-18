@@ -7,7 +7,7 @@ namespace WebGiaoDichViecLam.Models
         [Key]
         public int iProfileID { get; set; }
 
-        public int FK_iAccountID { get; set; }
+        public int iAccountID { get; set; }
 
         public string sFullName { get; set; }
 

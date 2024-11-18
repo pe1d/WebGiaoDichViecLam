@@ -16,7 +16,7 @@ namespace WebGiaoDichViecLam.Models
 
         public string sEmailAccount { get; set; } = null!;
 
-        public int FK_iRoleID { get; set; } 
+        public int iRoleID { get; set; } 
 
 
 

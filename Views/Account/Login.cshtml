@@ -5,42 +5,51 @@
 <header class="page-header">
     <h2 class="page-title">Đăng nhập tài khoản</h2>
 </header>
+
 <div id="primary" class="content-area container" role="main">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
             <article id="post-51" class="post-51 page type-page status-publish hentry">
                 <div class="entry-content">
                     <div class="woocommerce">
-                        <div class="woocommerce-notices-wrapper"></div>
+                        <div class="woocommerce-notices-wrapper">
+                            <!-- Hiển thị thông báo lỗi nếu có -->
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-danger">
+                                    @ViewBag.ErrorMessage
+                                </div>
+                            }
+                        </div>
+
                         <div class="woocommerce-customer-login">
                             <h2>Login</h2>
-                            <form class="woocommerce-form woocommerce-form-login login" method="post">
+                            <form asp-action="Login" method="post" class="woocommerce-form woocommerce-form-login login">
                                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                                    <label for="username">Tên đăng nhập hoặc Địa chỉ email&nbsp;<span
-                                            class="required">*</span></label>
+                                    <label for="username">Tên đăng nhập hoặc Địa chỉ email&nbsp;<span class="required">*</span></label>
                                     <input type="text" class="woocommerce-Input woocommerce-Input--text input-text"
-                                        name="username" id="username" autocomplete="username" value="" />
+                                           name="username" id="username" autocomplete="username" value="" required />
                                 </p>
+
                                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                     <label for="password">Mật khẩu&nbsp;<span class="required">*</span></label>
                                     <input class="woocommerce-Input woocommerce-Input--text input-text" type="password"
-                                        name="password" id="password" autocomplete="current-password" />
+                                           name="password" id="password" autocomplete="current-password" required />
                                 </p>
+
                                 <div class="form-row">
-                                    <label
-                                        class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme">
+                                    <label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme">
                                         <input class="woocommerce-form__input woocommerce-form__input-checkbox"
-                                            name="rememberme" type="checkbox" id="rememberme" value="forever" />
+                                               name="rememberme" type="checkbox" id="rememberme" value="forever" />
                                         <span>Nhớ mật khẩu</span>
                                     </label>
-                                    <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce"
-                                        value="6c98d4cb39" />
-                                    <input type="hidden" name="_wp_http_referer" value="/skin-2/myaccount/" />
                                 </div>
-                                <!-- Nút đăng nhập được đặt ở đây -->
+
                                 <button type="submit" class="woocommerce-button button woocommerce-form-login__submit"
-                                    name="login" value="Log in">Đăng nhập</button>
-                                <!-- Phần Quên mật khẩu -->
+                                        name="login" value="Log in">
+                                    Đăng nhập
+                                </button>
+
                                 <p class="woocommerce-LostPassword lost_password" style="margin-top: 10px;">
                                     <a href="/Account/ForgotPassword">Quên mật khẩu?</a>
                                 </p>
@@ -48,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-            </article><!-- #post -->
+            </article>
         </div>
     </div>
-</div><!-- #primary -->
+</div>
