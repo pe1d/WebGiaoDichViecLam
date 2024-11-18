@@ -37,8 +37,10 @@ namespace WebGiaoDichViecLam.Controllers
             }
             return View();
         }
-        public IActionResult DetailJob()
+        public async Task<IActionResult> DetailJob(int id)
         {
+            var job = await _context.tblJob.Include(j => j.TblCategory).Include(j => j.TblCompany).FirstOrDefaultAsync(item => item.iJobID == id);
+            ViewBag.job = job;
             return View();
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

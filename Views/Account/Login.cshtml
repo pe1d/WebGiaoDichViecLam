@@ -1,5 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Đăng nhập";
+    bool isLockedOut = ViewData["IsLockedOut"] != null && (bool)ViewData["IsLockedOut"];
 }
 
 <header class="page-header">
@@ -14,7 +15,8 @@
                         <div class="woocommerce-notices-wrapper"></div>
                         <div class="woocommerce-customer-login">
                             <h2>Login</h2>
-                            <form class="woocommerce-form woocommerce-form-login login" method="post">
+                            <form asp-action="Login" class="woocommerce-form woocommerce-form-login login"
+                                method="post">
                                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                     <label for="username">Tên đăng nhập hoặc Địa chỉ email&nbsp;<span
                                             class="required">*</span></label>
@@ -39,7 +41,7 @@
                                 </div>
                                 <!-- Nút đăng nhập được đặt ở đây -->
                                 <button type="submit" class="woocommerce-button button woocommerce-form-login__submit"
-                                    name="login" value="Log in">Đăng nhập</button>
+                                    name="login" value="Log in" @(isLockedOut ? "disabled" : "")> Đăng nhập</button>
                                 <!-- Phần Quên mật khẩu -->
                                 <p class="woocommerce-LostPassword lost_password" style="margin-top: 10px;">
                                     <a href="/Account/ForgotPassword">Quên mật khẩu?</a>
@@ -51,4 +53,15 @@
             </article><!-- #post -->
         </div>
     </div>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
 </div><!-- #primary -->
