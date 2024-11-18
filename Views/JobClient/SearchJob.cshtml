@@ -123,35 +123,65 @@
                 <div class="job_manager widget_featured_jobs">
                     <ul class="job_listings">
                         @* Dùng foreach tại đây để list ra danh sách *@
-                        @foreach (var job in ViewBag.Jobs)
-                        {
-                            <li class="job_listing job-type-freelance job_position_featured type-job_listing status-publish has-post-thumbnail hentry job_listing_region-new-york job_listing_type-freelance"
-                                data-title="Web Designer at Squarespace" data-href="job/square-web-designer/index.html">
-                                <a href="job/square-web-designer/index.html" class="job_listing-clickbox"></a>
-                                <div class="job_listing-logo">
-                                    <img class="company_logo"
-                                        src="~/wp-content/uploads/sites/5/2021/09/listing-squarespace-logo-150x150-1-150x150.jpg"
-                                        alt="Web Designer" />
-                                </div>
-                                <div class="job_listing-about">
-                                    <div class="job_listing-position job_listing__column">
-                                        <h3 class="job_listing-title">@job.sNameJob</h3>
+                        <li class="job_listing job-type-freelance job_position_featured type-job_listing status-publish has-post-thumbnail hentry job_listing_region-new-york job_listing_type-freelance"
+                            data-title="Web Designer at Squarespace" data-href="job/square-web-designer/index.html">
+                            <a href="job/square-web-designer/index.html" class="job_listing-clickbox"></a>
+                            <div class="job_listing-logo">
+                                <img class="company_logo"
+                                    src="~/wp-content/uploads/sites/5/2021/09/listing-squarespace-logo-150x150-1-150x150.jpg"
+                                    alt="Web Designer" />
+                            </div>
+                            <div class="job_listing-about">
+                                <div class="job_listing-position job_listing__column">
+                                    <h3 class="job_listing-title">Thiết kế Web</h3>
 
-                                        <div class="job_listing-company">
-                                            <strong>@job.TblCategory.sCategoryName</strong>
-                                        </div>
+                                    <div class="job_listing-company">
+                                        <strong>Thiết kế Web</strong>
                                     </div>
-                                    <div class="job_listing-location job_listing__column">
-                                        <a class="google_map_link" target="_blank">@job.TblCompany.sAddressCompany</a>
-                                    </div>
-                                    <ul class="job_listing-meta job_listing__column">
-                                        <li class="job_listing-type job-type">@job.sTypeJob
-                                        </li>
-                                        <li class="job_listing-date">Đăng 3 tiếng trước</li>
-                                    </ul>
                                 </div>
-                            </li>
-                        }
+                                <div class="job_listing-location job_listing__column">
+                                    <a class="google_map_link" target="_blank">Thanh Xuân, Hà Nội</a>
+                                </div>
+                                <ul class="job_listing-meta job_listing__column">
+                                    <li class="job_listing-type job-type freelance">freelance
+                                    </li>
+                                    <li class="job_listing-date">Đăng 3 tiếng trước</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="job_listing job-type-part-time job_position_featured  type-job_listing status-publish has-post-thumbnail hentry job_listing_region-toronto job_listing_type-part-time"
+                            data-title="Art Director at Shopify" data-href="job/art-director/index.html">
+                            <a href="#" class="job_listing-clickbox"></a>
+
+                            <div class="job_listing-logo">
+                                <img class="company_logo"
+                                    src="~/wp-content/uploads/sites/5/2021/09/listing-shopify-logo-300x300-1-150x150.jpg"
+                                    alt="Art Director" />
+                            </div>
+                            <div class="job_listing-about">
+
+                                <div class="job_listing-position job_listing__column">
+                                    <h3 class="job_listing-title">Art Director</h3>
+
+                                    <div class="job_listing-company">
+                                        <strong>Art Director</strong>
+                                    </div>
+                                </div>
+
+                                <div class="job_listing-location job_listing__column">
+                                    <a class="google_map_link" target="_blank">Cầu giấy, Hà Nội</a>
+                                </div>
+
+                                <ul class="job_listing-meta job_listing__column">
+
+                                    <li class="job_listing-type job-type part-time">part-time
+                                    </li>
+
+                                    <li class="job_listing-date">Đăng 3 tiếng trước</li>
+
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

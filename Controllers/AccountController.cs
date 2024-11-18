@@ -18,6 +18,10 @@ namespace WebGiaoDichViecLam.Controllers
 		{
 			return View();
 		}
+		public IActionResult ChangePassword()
+		{
+			return View();
+		}
 
 		public IActionResult SignUp()
 		{
