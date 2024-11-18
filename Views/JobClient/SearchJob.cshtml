@@ -21,7 +21,7 @@
     public static string FormatToVND(double amount)
     {
         var culture = new CultureInfo("vi-VN");
-        return string.Format("vi-VN", "{0:C0}", amount);
+        return string.Format(culture, "{0:C0}", amount);
     }
 }
 <header class="page-header">
