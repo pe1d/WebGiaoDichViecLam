@@ -5,6 +5,13 @@
     <h2 class="page-title">Đăng ký tài khoản</h2>
 </header>
 
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
 <div id="primary" class="content-area container" role="main">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
