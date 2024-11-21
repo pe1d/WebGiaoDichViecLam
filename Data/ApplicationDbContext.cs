@@ -45,6 +45,7 @@ namespace WebGiaoDichViecLam.Data
         public DbSet<tblProfileUser> tblProfileUser { get; set; }
         public DbSet<tblReviews> tblReviews { get; set; }
         public DbSet<tblRole> tblRole { get; set; }
+        public DbSet<tblJobUser> tblJobUser { get; set; }
 
     }
 }

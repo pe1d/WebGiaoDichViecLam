@@ -68,91 +68,153 @@
                 </aside>
                 <aside class="widget widget--job_listing widget--job_listing-top">
                     <div class="job_application application">
-                        <input type="button" class="application_button button" value="Apply for job" />
-                        <div class="application_details">
-                            <form class="job-manager-application-form job-manager-form" method="post"
-                                enctype="multipart/form-data"
-                                action="https://jobify-demos.astoundify.com/skin-2/job/frontend-developer/">
-                                <h2 class="modal-title">Apply</h2>
-                                <fieldset class="fieldset-candidate_name">
-                                    <label for="candidate_name">Full name</label>
-                                    <div class="field required-field">
-                                        <input type="text" class="input-text" name="candidate_name" id="candidate_name"
-                                            placeholder="" value="" maxlength="" required />
-                                    </div>
-                                </fieldset>
-                                <fieldset class="fieldset-candidate_email">
-                                    <label for="candidate_email">Email address</label>
-                                    <div class="field required-field">
-                                        <input type="text" class="input-text" name="candidate_email"
-                                            id="candidate_email" placeholder="" value="" maxlength="" required />
-                                    </div>
-                                </fieldset>
-                                <fieldset class="fieldset-application_message">
-                                    <label for="application_message">Message</label>
-                                    <div class="field required-field">
-                                        <textarea cols="20" rows="3" class="input-text" name="application_message"
-                                            id="application_message"
-                                            placeholder="Your cover letter/message sent to the employer" maxlength=""
-                                            required></textarea>
-                                    </div>
-                                </fieldset>
-                                <fieldset class="fieldset-application_attachment">
-                                    <label for="application_attachment">Upload CV
-                                        <small>(optional)</small></label>
-                                    <div class="field ">
-                                        <label for="application_attachment" class="file-field-label">
-                                            <div class="job-manager-uploaded-files">
-                                            </div>
-
-                                            <input type="file" class="input-text listify-file-upload"
-                                                data-file_types="jpg|jpeg|jpe|png|gif|webp|mov|qt|avi|mpeg|mpg|mpe|3gp|3gpp|3g2|3gp2|mid|midi|pdf|doc|docx|docm|pot|pps|ppt|pptx|pptm|odt|ppsx|ppsm|xla|xls|xlt|xlw|xlsx|xlsm|xlsb|key|mp3|m4a|m4b|ogg|oga|flac|wav|mp4|m4v|webm|ogv|flv"
-                                                multiple name="application_attachment[]"
-                                                data-multiple-caption="%d files selected" id="application_attachment"
-                                                placeholder="" />
-
-                                            <span class="button button--size-medium">
-                                                Choose File </span>
-                                        </label>
-
-                                        <small class="description file-field-description">
-                                            Upload your CV/resume or any other relevant file. Max. file
-                                            size: 1 MB. </small>
-                                    </div>
-                                </fieldset>
-                                <p>
-                                    <input type="submit" class="button wp_job_manager_send_application_button"
-                                        value="Send application" />
-                                    <input type="hidden" name="wp_job_manager_send_application" value="1" />
-                                    <input type="hidden" name="job_id" value="90" />
-                                </p>
-                            </form>
-                            <hr />
-                            <form class="apply_with_resume" method="post"
-                                action="https://jobify-demos.astoundify.com/skin-2/job/frontend-developer/">
-                                <p>You can apply to this job and others using your online resume. Click the
-                                    link below to submit your online resume and email your application to
-                                    this employer.</p>
-
-                                <p>
-                                    <input type="submit" name="wp_job_manager_resumes_apply_with_resume_create"
-                                        value="Submit Resume &amp; Apply" />
-                                    <input type="hidden" name="job_id" value="90" />
-                                </p>
-                            </form>
-                        </div>
+                        <input type="button" name="apply_Job" class="application_button button" value="Ứng tuyển" />
                     </div>
                 </aside>
             </div>
         </div>
         <div class="job-overview-content row">
             <div class="job_listing-description job-overview col-md-12 col-sm-12">
-                <h2 class="widget-title widget-title--job_listing-top job-overview-title">Overview</h2>
+                <h2 class="widget-title widget-title--job_listing-top job-overview-title">Tổng quan</h2>
                 <h4>Mô tả doanh nghiệp</h4>
                 <p>@ViewBag.job.TblCompany.sDescriptionCompany</p>
-                <h3>Job Description</h3>
+                <h3>Mô tả công việc </h3>
                 <p>@ViewBag.job.sDescriptionJob</p>
             </div>
         </div>
     </div>
 </div>
+<div id="modalBackdrop" class="modal-backdrop-custom" style="display: none;"></div>
+<div id="applyModal" class="application_details modal" style="position: fixed; top: 20px; left: 0px;
+right: 0px; background-color: white; height: auto; z-index: 1000;">
+    <button type="button" class="close" style="position: absolute; top: 20px; right: 20px;" data-dismiss="modal"
+        aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <form class="job-manager-application-form job-manager-form" method="post" enctype="multipart/form-data">
+        <h2 class="modal-title">Ứng tuyển </h2>
+        <fieldset class="fieldset-candidate_name">
+            <label for="candidate_name">Họ và tên </label>
+            <div class="field required-field">
+                <input type="text" class="input-text" name="candidate_name" id="candidate_name" placeholder="" value=""
+                    maxlength="" required />
+            </div>
+        </fieldset>
+        <fieldset class="fieldset-candidate_email">
+            <label for="candidate_email">Địa chỉ email</label>
+            <div class="field required-field">
+                <input type="text" class="input-text" name="candidate_email" id="candidate_email" placeholder=""
+                    value="" maxlength="" required />
+            </div>
+        </fieldset>
+        <fieldset class="fieldset-application_message">
+            <label for="application_message">Thư giới thiệu</label>
+            <div class="field required-field">
+                <textarea cols="20" rows="3" class="input-text" name="application_message" id="application_message"
+                    placeholder="Your cover letter/message sent to the employer" maxlength="" required></textarea>
+            </div>
+        </fieldset>
+        <fieldset class="fieldset-application_attachment">
+            <label for="application_attachment">Thêm CV
+                <small>(không bắt buộc)</small></label>
+            <div class="field ">
+                <label for="application_attachment" class="file-field-label">
+                    <div class="job-manager-uploaded-files">
+                    </div>
+
+                    <input type="file" class="input-text listify-file-upload"
+                        data-file_types="jpg|jpeg|jpe|png|gif|webp|mov|qt|avi|mpeg|mpg|mpe|3gp|3gpp|3g2|3gp2|mid|midi|pdf|doc|docx|docm|pot|pps|ppt|pptx|pptm|odt|ppsx|ppsm|xla|xls|xlt|xlw|xlsx|xlsm|xlsb|key|mp3|m4a|m4b|ogg|oga|flac|wav|mp4|m4v|webm|ogv|flv"
+                        multiple name="application_attachment[]" data-multiple-caption="%d files selected"
+                        id="application_attachment" placeholder="" />
+
+                    <span class="button button--size-medium">
+                        Chọn tệp </span>
+                </label>
+
+                <small class="description file-field-description">
+                    Đăng CV của bạn hoặc những tệp liên quan. Tối đa: 1MB.
+                </small>
+            </div>
+        </fieldset>
+        <p>
+            <input type="submit" class="button wp_job_manager_send_application_button" value="Gửi đơn ứng tuyển"
+                onclick="ApplyJob(event)" />
+            <input id="btn_close" type="button" class="application_button button" value="Hủy" />
+            <input type="hidden" name="wp_job_manager_send_application" value="1" />
+            <input type="hidden" name="job_id" value="@ViewBag.job.iJobID" />
+        </p>
+    </form>
+</div>
+<script>
+    async function ApplyJob(event) {
+        event.preventDefault();
+        const jobId = document.querySelector("input[name='job_id']").value;
+        const applicationMessage = document.getElementById("application_message").value;
+
+        const payload = {
+            jobID: jobId,
+            message: applicationMessage
+        };
+
+        try {
+            const response = await fetch("/api/job/apply", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert("Ứng tuyển thành công!");
+                document.querySelector("input[name='apply_Job']").value = "Đã ứng tuyển";
+                hideModal()
+            } else {
+                const error = await response.text();
+                alert("Có lỗi xảy ra: " + error);
+            }
+        } catch (error) {
+            console.error("Fetch error: ", error);
+            alert("Có lỗi xảy ra khi gửi ứng tuyển!");
+        }
+    }
+    function showModal() {
+        document.getElementById("applyModal").style.display = "block";
+        document.getElementById("modalBackdrop").style.display = "block";
+    }
+    // Ẩn modal và backdrop
+    function hideModal() {
+        console.log("Check hide");
+        document.getElementById("applyModal").style.display = "none";
+        document.getElementById("modalBackdrop").style.display = "none";
+    }
+    document.querySelector(".application_button").addEventListener("click", function () {
+        // Kiểm tra trạng thái đăng nhập (thông qua ViewBag hoặc API backend)
+        const isAuthenticated = @User.Identity.IsAuthenticated.ToString().ToLower(); // true/false từ Razor
+
+        if (isAuthenticated) {
+            // Hiển thị modal Apply
+            showModal();
+        } else {
+            // Chuyển đến trang đăng nhập
+            const confirmLogin = confirm("Bạn cần đăng nhập để ứng tuyển. Bạn có muốn đăng nhập không?");
+            if (confirmLogin) {
+                // Chuyển đến trang đăng nhập
+                window.location.href = "/Account/Login";
+            }
+        }
+    });
+    // Đóng modal
+    document.querySelector(".modal .close").addEventListener("click", hideModal);
+    document.getElementById("btn_close").addEventListener("click", hideModal);
+    document.getElementById("modalBackdrop").addEventListener("click", hideModal);
+    // Xử lý gửi form
+    document.getElementById("applyForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        // Xử lý gửi thông tin ứng tuyển qua API hoặc backend
+        alert("Application submitted successfully!");
+        document.getElementById("applyModal").style.display = "none";
+    });
+
+</script>
