@@ -958,12 +958,12 @@
                                         </li>
                                         <li id="menu-item-72"
                                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72">
-                                            <a href="#">Việc làm đã ứng tuyển</a>
+                                            <a asp-controller="JobClient" asp-action="MyApplyJob" >Việc làm đã ứng tuyển</a>
                                         </li>
-                                        <li id="menu-item-17"
+                                        @* <li id="menu-item-17"
                                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17">
                                             <a href="#">Việc làm đã lưu</a>
-                                        </li>
+                                        </li> *@
                                         <li id="menu-item-70"
                                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-70">
                                             <a href="#">Danh sách công ty</a>
@@ -972,7 +972,8 @@
                                 </li>
                                 <li id="menu-item-33"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33"><a
-                                        href="blog/index.html">Bài viết</a></li>
+                                        href="blog/index.html">Bài viết</a>
+                                        </li>
                                 @if(!User.Identity.IsAuthenticated){
                                     <li id="menu-item-58"
                                         class="register menu-item menu-item-type-post_type menu-item-object-page menu-item-58">
