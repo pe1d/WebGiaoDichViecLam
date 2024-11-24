@@ -21,55 +21,95 @@
                         <div class="elementor-widget-container">
                             1,570 việc làm! Công việc mơ ước đang đợi bạn. </div>
                     </div>
-                    <div class="elementor-element elementor-element-422f5bb4 hero-section-jobify-section-home-page elementor-widget elementor-widget-wp-widget-jobify_widget_search_hero"
-                        data-id="422f5bb4" data-element_type="widget"
-                        data-widget_type="wp-widget-jobify_widget_search_hero.default">
-                        <div class="elementor-widget-container">
-                            <div class="widget--home-hero-search">
-                                <div class="hero-search hero-search--no-overlay hero-search--height-small"
-                                    style="background-image:url(); ?>; background-position: center bottom">
+                    <section
+                        class="elementor-section elementor-top-section elementor-element job-listing-jobify-skin-2 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+                        data-element_type="section">
+                        <div class="elementor-container elementor-column-gap-default">
+                            <div class="elementor-column elementor-col-100 elementor-top-column elementor-element"
+                                data-element_type="column">
+                                <div class="elementor-widget-wrap elementor-element-populated">
+                                    <div class="elementor-element elementor-widget elementor-widget-elementify-jobs"
+                                        data-element_type="widget" data-widget_type="elementify-jobs.default">
+                                        <div class="elementor-widget-container">
+                                            <div id="primary" role="main">
+                                                <div class="container content-area">
+                                                    <div class="job_listings" data-location="" data-keywords=""
+                                                        data-show_filters="true" data-show_pagination="false"
+                                                        data-per_page="10" data-orderby="featured" data-order="DESC"
+                                                        data-categories="" data-disable-form-state-storage=""
+                                                        data-post_id="166">
+                                                        <form class="job_filters">
+                                                            <div class="search_jobs">
+                                                                <div class="search_keywords">
+                                                                    <label for="search_keywords">Từ khóa</label>
+                                                                    <input type="text" name="search_keywords"
+                                                                        id="search_keywords" placeholder="Từ khóa"
+                                                                        value="" />
+                                                                </div>
+                                                                <div class="search_location">
+                                                                    <label for="search_location">Địa điểm</label>
+                                                                    <input type="text" name="search_location"
+                                                                        id="search_location" placeholder="Địa điểm"
+                                                                        value="" />
+                                                                </div>
+                                                                <div class="search_categories">
+                                                                    <label for="search_categories">Ngành nghề</label>
+                                                                    <select id='search_categories' class='form-select'>
+                                                                        <option value="">Chọn ngành nghề</option>
+                                                                        @foreach (var cate in ViewBag.Categories)
+                                                                        {
+                                                                            <option class="level-0"
+                                                                                value="@cate.iCategoryID">
+                                                                                @cate.sCategoryName</option>
+                                                                        }
+                                                                    </select>
+                                                                </div>
+                                                                <div class="search_submit">
+                                                                    <input type="submit" name="submit" value="Search">
+                                                                </div>
+                                                            </div>
+                                                            <ul class="job_types">
+                                                                <li><label for="job_type_freelance"
+                                                                        class="freelance"><input type="checkbox"
+                                                                            name="filter_job_type[]" value="freelance"
+                                                                            checked='checked' id="job_type_freelance" />
+                                                                        freelance</label>
+                                                                </li>
+                                                                <li>
+                                                                    <input type="checkbox" name="filter_job_type[]"
+                                                                        value="full-time" checked='checked'
+                                                                        id="job_type_full-time" />
+                                                                    <label for="job_type_full-time"
+                                                                        class="full-time">Toàn thời
+                                                                        gian</label>
+                                                                </li>
+                                                                <li>
+                                                                    <input type="checkbox" name="filter_job_type[]"
+                                                                        value="internship" checked='checked'
+                                                                        id="job_type_internship" />
+                                                                    <label for="job_type_internship" class="internship">
+                                                                        Thực tập</label>
+                                                                </li>
+                                                                <li>
+                                                                    <input type="checkbox" name="filter_job_type[]"
+                                                                        value="part-time" checked='checked'
+                                                                        id="job_type_part-time" />
+                                                                    <label for="job_type_part-time" class="part-time">
+                                                                        Bán thời gian</label>
+                                                                </li>
+                                                            </ul>
+                                                            <input type="hidden" name="filter_job_type[]" value="" />
+                                                        </form>
+                                                    </div>
+                                                </div>
 
-                                    <div class="container">
-                                        <div class="hero-search__content" style="color:">
-                                            <h2 class="hero-search__title" style="color:"></h2>
+                                            </div><!-- #primary -->
                                         </div>
-                                        <form class="job_search_form job_search_form--flat"
-                                            action="https://jobify-demos.astoundify.com/skin-2/find-a-job/"
-                                            method="GET">
-                                            <div class="search_jobs">
-                                                <div class="search_keywords">
-                                                    <label for="search_keywords">Từ khóa</label>
-                                                    <input type="text" name="search_keywords" id="search_keywords"
-                                                        placeholder="Từ khóa" />
-                                                </div>
-
-                                                <div class="search_location">
-                                                    <label for="search_location">Địa điểm</label>
-                                                    <input type="text" name="search_location" id="search_location"
-                                                        placeholder="Ví trí" />
-                                                </div>
-                                                <div class="search_categories search_category_dropdown">
-                                                    <label for="search_categories">Ngành nghề</label>
-                                                    <select class="search_category form-select"
-                                                        id="search_category_dropdown" name="search_category">
-                                                        <option value="">Chọn ngành nghề</option>
-                                                        <option class="level-0" value="53">Thiết kế</option>
-                                                        <option class="level-0" value="54">Lập trình viên</option>
-                                                        <option class="level-0" value="55">Kế toán</option>
-                                                        <option class="level-0" value="56">Marketing</option>
-                                                    </select>
-                                                </div>
-                                                <div class="search_submit">
-                                                    <input type="submit" value="Tìm kiếm việc làm">
-                                                </div>
-                                            </div>
-                                            <div class="showing_jobs"></div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
         </div>

@@ -27,6 +27,13 @@ namespace WebGiaoDichViecLam.Controllers
             ViewBag.companies = await _context.tblCompany.ToArrayAsync();
             return View();
         }
+        public async Task<IActionResult> DetailCompany(int id)
+        {
+            ViewBag.company = await _context.tblCompany.FirstOrDefaultAsync(item => item.iCompanyID == id);
+            ViewBag.countJob = await _context.tblJob.Where(j => j.iCompanyID == id).CountAsync();
+            ViewBag.jobs = await _context.tblJob.Include(item => item.TblCategory).Where(j => j.iCompanyID == id).ToListAsync();
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
