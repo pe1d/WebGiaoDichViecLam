@@ -78,3 +78,38 @@ body {
   background: rgba(0, 0, 0, 0.5); /* Nền tối mờ */
   z-index: 1000;
 }
+@media screen and (min-width: 1024px) {
+  .search_jobs {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+  }
+
+  .search_keywords {
+      flex: 1;
+      margin-right: 10px; /* Adds some space between the input field and the button */
+  }
+
+  .search_keywords input {
+      width: 100%;
+      padding: 10px;
+  }
+
+  .search_submit {
+      flex-shrink: 0;
+  }
+
+  .search_submit input {
+      padding: 10px 20px;
+      background-color: #4a3aff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+
+  .search_submit input:hover {
+      background-color: #362d9c;
+  }
+}
