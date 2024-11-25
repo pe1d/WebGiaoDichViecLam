@@ -1,6 +1,7 @@
 @{
     ViewData["Title"] = "Detail";
 }
+
 @functions {
     public string GetRelativeTime(DateTime postedDate)
     {
@@ -67,10 +68,19 @@
                     </ul>
                 </aside>
                 <aside class="widget widget--job_listing widget--job_listing-top">
-                    <div class="job_application application">
+                    <div class="job_application application" style="display: inline-block; margin-right: 10px;">
                         <input type="button" name="apply_Job" class="application_button button" value="Ứng tuyển" />
                     </div>
+                    <div class="job_application application" style="display: inline-block;">
+                        <input type="button" name="save_Job" id="save_Job"
+                               class="save_button button"
+                               value="@(ViewBag.IsJobSaved ?? false ? "Đã lưu công việc" : "Lưu công việc")"
+                               data-job-id="@ViewBag.job.iJobID" />
+                    </div>
+
+
                 </aside>
+
             </div>
         </div>
         <div class="job-overview-content row">
@@ -145,6 +155,7 @@ right: 0px; background-color: white; height: auto; z-index: 1000;">
         </p>
     </form>
 </div>
+
 <script>
     async function ApplyJob(event) {
         event.preventDefault();
@@ -179,6 +190,9 @@ right: 0px; background-color: white; height: auto; z-index: 1000;">
             alert("Có lỗi xảy ra khi gửi ứng tuyển!");
         }
     }
+
+
+
     function showModal() {
         document.getElementById("applyModal").style.display = "block";
         document.getElementById("modalBackdrop").style.display = "block";
@@ -205,6 +219,84 @@ right: 0px; background-color: white; height: auto; z-index: 1000;">
             }
         }
     });
+
+    // Lưu công việc
+
+    async function saveJob(event) {
+        event.preventDefault();
+        const jobId = document.querySelector("input[name='save_Job']").getAttribute('data-job-id'); // Lấy ID công việc từ thuộc tính data
+
+        const payload = {
+            jobID: jobId
+        };
+
+        try {
+            const response = await fetch("/api/job/save", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert("Công việc đã được lưu!");
+                document.querySelector("input[name='save_Job']").value = "Đã lưu công việc"; // Cập nhật giá trị nút
+            } else {
+                const error = await response.text();
+                alert("Có lỗi xảy ra khi lưu công việc: " + error);
+            }
+        } catch (error) {
+            console.error("Fetch error: ", error);
+            alert("Có lỗi xảy ra khi lưu công việc!");
+        }
+    }
+        // Hủy lưu công việc
+    async function unsaveJob(event) {
+        event.preventDefault();
+        const jobId = document.querySelector("input[name='save_Job']").getAttribute('data-job-id'); // Lấy ID công việc từ thuộc tính data
+
+        const payload = {
+            jobID: jobId
+        };
+
+        try {
+            const response = await fetch("/api/job/unsave", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert(result.message); // Thông báo hủy lưu thành công
+                document.querySelector("input[name='save_Job']").value = "Lưu công việc"; // Thay đổi nút thành "Lưu công việc"
+            } else {
+                const error = await response.text();
+                alert("Có lỗi xảy ra khi hủy lưu công việc: " + error);
+            }
+        } catch (error) {
+            console.error("Fetch error: ", error);
+            alert("Có lỗi xảy ra khi hủy lưu công việc!");
+        }
+    }
+
+    // Lắng nghe sự kiện "Đã lưu công việc"
+    document.querySelector(".save_button").addEventListener("click", function (event) {
+        const jobStatus = document.querySelector("input[name='save_Job']").value;
+   
+        // Nếu công việc đã lưu, hủy lưu công việc
+        if (jobStatus === "Đã lưu công việc") {
+            unsaveJob(event);
+        } else {
+            // Nếu chưa lưu, tiến hành lưu công việc (sử dụng saveJob() đã có)
+            saveJob(event);
+        }
+    });
+
     // Đóng modal
     document.querySelector(".modal .close").addEventListener("click", hideModal);
     document.getElementById("btn_close").addEventListener("click", hideModal);

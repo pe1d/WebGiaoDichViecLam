@@ -58,5 +58,85 @@ namespace WebGiaoDichViecLam.Controllers
 
             return Ok(new { message = "Ứng tuyển thành công!" });
         }
+
+        [HttpPost("save")]
+        public async Task<IActionResult> SaveJob([FromBody] JsonElement data)
+        {
+            int jobId = int.Parse(data.GetProperty("jobID").GetString());
+                
+            // Kiểm tra xem công việc có tồn tại không
+            var job = await _context.tblJob.FindAsync(jobId);
+            if (job == null)
+            {
+                return NotFound("Công việc không tồn tại.");
+            }
+
+            // Lấy thông tin người dùng hiện tại
+            var profile = await _context.tblProfileUser
+                .FirstOrDefaultAsync(p => p.iAccountID.ToString() == User.FindFirstValue(ClaimTypes.Sid)); // User.FindFirstValue(ClaimTypes.Sid) là ID người dùng.
+            if (profile == null)
+            {
+                return BadRequest("Không tìm thấy thông tin hồ sơ người dùng.");
+            }
+
+            // Kiểm tra nếu công việc đã được lưu
+            var existingSavedJob = await _context.tblSavedJob
+                .FirstOrDefaultAsync(s => s.iJobID == jobId && s.iProfileID == profile.iProfileID);
+
+            if (existingSavedJob != null)
+            {
+                return BadRequest("Công việc này đã được lưu trước đó.");
+            }
+
+            // Tạo đối tượng tblSavedJob để lưu công việc
+            var savedJob = new tblSavedJob
+            {
+                iJobID = jobId,
+                iProfileID = profile.iProfileID
+            };
+
+            // Lưu vào cơ sở dữ liệu
+            _context.tblSavedJob.Add(savedJob);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Công việc đã được lưu thành công!" });
+        }
+
+
+        [HttpPost("unsave")]
+        public async Task<IActionResult> UnsaveJob([FromBody] JsonElement data)
+        {
+            int jobId = int.Parse(data.GetProperty("jobID").GetString());
+
+            // Kiểm tra xem công việc có tồn tại không
+            var job = await _context.tblJob.FindAsync(jobId);
+            if (job == null)
+            {
+                return NotFound("Công việc không tồn tại.");
+            }
+
+            // Lấy thông tin người dùng hiện tại
+            var profile = await _context.tblProfileUser
+                .FirstOrDefaultAsync(p => p.iAccountID.ToString() == User.FindFirstValue(ClaimTypes.Sid)); // User.FindFirstValue(ClaimTypes.Sid) là ID người dùng.
+            if (profile == null)
+            {
+                return BadRequest("Không tìm thấy thông tin hồ sơ người dùng.");
+            }
+
+            // Kiểm tra xem công việc đã được lưu chưa
+            var savedJob = await _context.tblSavedJob
+                .FirstOrDefaultAsync(s => s.iJobID == jobId && s.iProfileID == profile.iProfileID);
+
+            if (savedJob == null)
+            {
+                return NotFound("Công việc này chưa được lưu.");
+            }
+
+            // Xóa công việc khỏi danh sách đã lưu
+            _context.tblSavedJob.Remove(savedJob);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Công việc đã được hủy lưu thành công!" });
+        }
     }
 }

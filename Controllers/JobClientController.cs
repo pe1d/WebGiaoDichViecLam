@@ -43,7 +43,30 @@ namespace WebGiaoDichViecLam.Controllers
         public async Task<IActionResult> DetailJob(int id)
         {
             var job = await _context.tblJob.Include(j => j.TblCategory).Include(j => j.TblCompany).FirstOrDefaultAsync(item => item.iJobID == id);
+           
+            // Kiểm tra xem người dùng có đăng nhập hay không
+            var accountId = User.FindFirstValue(ClaimTypes.Sid);
+
+            if (!string.IsNullOrEmpty(accountId))
+            {
+                // Lấy thông tin hồ sơ của người dùng
+                var profile = await _context.tblProfileUser
+                    .FirstOrDefaultAsync(p => p.iAccountID.ToString() == accountId);
+
+                if (profile != null)
+                {
+                    // Kiểm tra xem công việc này đã được người dùng lưu chưa
+                    var isJobSaved = await _context.tblSavedJob
+                        .AnyAsync(sj => sj.iProfileID == profile.iProfileID && sj.iJobID == id);
+
+                    // Truyền thông tin vào ViewBag để hiển thị trạng thái nút "Lưu công việc"
+                    ViewBag.IsJobSaved = isJobSaved;
+                }
+            }
+
+            // Truyền thông tin công việc vào View
             ViewBag.job = job;
+
             return View();
         }
 
@@ -76,6 +99,37 @@ namespace WebGiaoDichViecLam.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        public async Task<IActionResult> MySaveJob()
+        {
+            var accountId = User.FindFirstValue(ClaimTypes.Sid);
+            if (string.IsNullOrEmpty(accountId))
+            {
+                return View(); // Hoặc xử lý phù hợp nếu người dùng không đăng nhập
+            }
+
+            // Lấy thông tin hồ sơ người dùng
+            var profile = await _context.tblProfileUser
+                .FirstOrDefaultAsync(p => p.iAccountID.ToString() == accountId);
+
+            if (profile == null)
+            {
+                return View(); // Trả về lỗi hoặc redirect nếu không tìm thấy profile
+            }
+
+            // Lấy danh sách công việc đã lưu của người dùng
+            var savedJobs = await _context.tblSavedJob
+                .Include(sj => sj.TblJob) // Bao gồm thông tin công việc
+                .Include(sj => sj.TblJob.TblCategory) // Bao gồm thông tin danh mục công việc
+                .Include(sj => sj.TblJob.TblCompany) // Bao gồm thông tin công ty
+                .Where(sj => sj.iProfileID == profile.iProfileID) // Lọc theo profile người dùng
+                .ToListAsync();
+
+            ViewBag.SavedJobs = savedJobs;
+
+            return View();
         }
     }
 }
