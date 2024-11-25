@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebGiaoDichViecLam.Models
 {
@@ -15,7 +16,7 @@ namespace WebGiaoDichViecLam.Models
 
         public string sAddress { get; set; } = null!;
 
-        public string sSkills {  get; set; } = null!;
+        public string sSkills { get; set; } = null!;
 
         public string sExperience { get; set; } = null!;
 
@@ -25,6 +26,7 @@ namespace WebGiaoDichViecLam.Models
 
         public string sPhoto { get; set; } = null!;
 
-
+        [ForeignKey("iAccountID")]
+        public virtual tblAccount TblAccount { get; set; } = null!;
     }
 }

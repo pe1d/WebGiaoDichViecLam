@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -377,7 +378,13 @@ namespace WebGiaoDichViecLam.Controllers
             int newId = _context.tblEmployer.Max(e => (int?)e.iEmployerID) ?? 0;
             return newId + 1;
         }
-
-
+        public async Task<IActionResult> DetailAccount()
+        {
+            var accountId = User.FindFirstValue(ClaimTypes.Sid);
+            ViewBag.user = await _context.tblProfileUser.Include(item => item.TblAccount)
+                        .FirstOrDefaultAsync(item => item.iAccountID.ToString() == accountId);
+            Console.WriteLine("Check: " + ViewBag.user.sAddress);
+            return View();
+        }
     }
 }
