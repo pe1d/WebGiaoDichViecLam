@@ -63,7 +63,7 @@ namespace WebGiaoDichViecLam.Controllers
         public async Task<IActionResult> SaveJob([FromBody] JsonElement data)
         {
             int jobId = int.Parse(data.GetProperty("jobID").GetString());
-                
+
             // Kiểm tra xem công việc có tồn tại không
             var job = await _context.tblJob.FindAsync(jobId);
             if (job == null)
@@ -102,7 +102,23 @@ namespace WebGiaoDichViecLam.Controllers
             return Ok(new { message = "Công việc đã được lưu thành công!" });
         }
 
-
+        [HttpGet("getJobDetail/{jobId}")]
+        public async Task<IActionResult> GetDetailJob(int jobId)
+        {
+            var job = await _context.tblJob.Include(item => item.TblCategory)
+            .FirstOrDefaultAsync(item => item.iJobID == jobId);
+            return Ok(new
+            {
+                NameJob = job.sNameJob,
+                SalaryJob = job.fSalaryJob,
+                TypeJob = job.sTypeJob,
+                PostedDate = job.dPostedDate, // Ví dụ thêm
+                ExpiryDate = job.dExpiryDate, // Ví dụ thêm
+                DescriptionJob = job.sDescriptionJob,
+                CategoryName = job.TblCategory.sCategoryName,
+                Applicants = _context.tblJobUser.Count(ju => ju.iJobID == job.iJobID)
+            });
+        }
         [HttpPost("unsave")]
         public async Task<IActionResult> UnsaveJob([FromBody] JsonElement data)
         {
@@ -137,6 +153,57 @@ namespace WebGiaoDichViecLam.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Công việc đã được hủy lưu thành công!" });
+        }
+        [HttpPost("add")]
+        public async Task<IActionResult> AddJob([FromBody] JsonElement data)
+        {
+            try
+            {
+                // Lấy dữ liệu từ JsonElement
+                Console.WriteLine("Check data: " + data);
+                var employ = await _context.tblEmployer
+                .FirstOrDefaultAsync(p => p.iAccountID.ToString() == User.FindFirstValue(ClaimTypes.Sid));
+                int iCompanyID = employ.iCompanyID;
+                int iCategoryID = int.Parse(data.GetProperty("iCategoryID").GetString());
+                string sNameJob = data.GetProperty("sNameJob").GetString() ?? string.Empty;
+                double fSalaryJob = data.GetProperty("fSalaryJob").GetDouble();
+                string sTypeJob = data.GetProperty("sTypeJob").GetString() ?? string.Empty;
+                DateTime dExpiryDate = DateTime.Parse(data.GetProperty("dExpiryDate").GetString());
+                string sDescriptionJob = data.GetProperty("sDescriptionJob").GetString() ?? string.Empty;
+
+                // Kiểm tra công ty và danh mục có tồn tại không
+                var companyExists = await _context.tblCompany.AnyAsync(c => c.iCompanyID == iCompanyID);
+                var categoryExists = await _context.tblCategory.AnyAsync(c => c.iCategoryID == iCategoryID);
+                var company = await _context.tblCompany.FirstOrDefaultAsync(c => c.iCompanyID == iCompanyID);
+                if (!companyExists)
+                    return NotFound(new { message = "Công ty không tồn tại." });
+                if (!categoryExists)
+                    return NotFound(new { message = "Danh mục không tồn tại." });
+                // Tạo đối tượng tblJob
+                var job = new tblJob
+                {
+                    iCompanyID = iCompanyID,
+                    iCategoryID = iCategoryID,
+                    sNameJob = sNameJob,
+                    sAddressJob = company.sAddressCompany,
+                    fSalaryJob = fSalaryJob,
+                    sTypeJob = sTypeJob,
+                    dPostedDate = DateTime.Now,
+                    dExpiryDate = dExpiryDate,
+                    sDescriptionJob = sDescriptionJob,
+
+                };
+
+                // Lưu vào cơ sở dữ liệu
+                await _context.tblJob.AddAsync(job);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Thêm việc thành công." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Có lỗi xảy ra.", error = ex.Message });
+            }
         }
     }
 }

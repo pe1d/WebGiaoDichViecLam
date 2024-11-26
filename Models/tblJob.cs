@@ -18,7 +18,7 @@ namespace WebGiaoDichViecLam.Models
 
         public string sNameJob { get; set; }
 
-
+        public string sAddressJob { get; set; }
         public double fSalaryJob { get; set; }
 
 
