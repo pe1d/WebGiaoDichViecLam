@@ -43,7 +43,7 @@ namespace WebGiaoDichViecLam.Controllers
         public async Task<IActionResult> DetailJob(int id)
         {
             var job = await _context.tblJob.Include(j => j.TblCategory).Include(j => j.TblCompany).FirstOrDefaultAsync(item => item.iJobID == id);
-           
+
             // Kiểm tra xem người dùng có đăng nhập hay không
             var accountId = User.FindFirstValue(ClaimTypes.Sid);
 
@@ -101,7 +101,26 @@ namespace WebGiaoDichViecLam.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public async Task<IActionResult> JobInCompany()
+        {
+            if (int.Parse(User.FindFirstValue(ClaimTypes.Role)) != 2)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var employer = await _context.tblEmployer.FirstOrDefaultAsync(item => item.iAccountID == int.Parse(User.FindFirstValue(ClaimTypes.Sid)));
+            if (employer == null)
+            {
+                return NotFound("Employer not found");
+            }
 
+            var listJobByCompany = await _context.tblJob
+                .Where(item => item.iCompanyID == employer.iCompanyID)
+                .Include(job => job.TblCategory)
+                .ToListAsync();
+            ViewBag.jobInCompany = listJobByCompany;
+            ViewBag.Categories = await _context.tblCategory.ToListAsync();
+            return View();
+        }
         public async Task<IActionResult> MySaveJob()
         {
             var accountId = User.FindFirstValue(ClaimTypes.Sid);

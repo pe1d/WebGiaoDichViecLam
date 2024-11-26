@@ -1,5 +1,6 @@
 @{
     ViewData["Title"] = "Detail";
+    var description = ViewBag.job.sDescriptionJob.Replace("\n", "<br>");
 }
 
 @functions {
@@ -72,10 +73,9 @@
                         <input type="button" name="apply_Job" class="application_button button" value="Ứng tuyển" />
                     </div>
                     <div class="job_application application" style="display: inline-block;">
-                        <input type="button" name="save_Job" id="save_Job"
-                               class="save_button button"
-                               value="@(ViewBag.IsJobSaved ?? false ? "Đã lưu công việc" : "Lưu công việc")"
-                               data-job-id="@ViewBag.job.iJobID" />
+                        <input type="button" name="save_Job" id="save_Job" class="save_button button"
+                            value="@(ViewBag.IsJobSaved ?? false ? "Đã lưu công việc" : "Lưu công việc")"
+                            data-job-id="@ViewBag.job.iJobID" />
                     </div>
 
 
@@ -89,7 +89,7 @@
                 <h4>Mô tả doanh nghiệp</h4>
                 <p>@ViewBag.job.TblCompany.sDescriptionCompany</p>
                 <h3>Mô tả công việc </h3>
-                <p>@ViewBag.job.sDescriptionJob</p>
+                <p>@Html.Raw(description)</p>
             </div>
         </div>
     </div>
@@ -252,7 +252,7 @@ right: 0px; background-color: white; height: auto; z-index: 1000;">
             alert("Có lỗi xảy ra khi lưu công việc!");
         }
     }
-        // Hủy lưu công việc
+    // Hủy lưu công việc
     async function unsaveJob(event) {
         event.preventDefault();
         const jobId = document.querySelector("input[name='save_Job']").getAttribute('data-job-id'); // Lấy ID công việc từ thuộc tính data
@@ -287,7 +287,7 @@ right: 0px; background-color: white; height: auto; z-index: 1000;">
     // Lắng nghe sự kiện "Đã lưu công việc"
     document.querySelector(".save_button").addEventListener("click", function (event) {
         const jobStatus = document.querySelector("input[name='save_Job']").value;
-   
+
         // Nếu công việc đã lưu, hủy lưu công việc
         if (jobStatus === "Đã lưu công việc") {
             unsaveJob(event);

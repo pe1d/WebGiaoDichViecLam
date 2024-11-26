@@ -971,10 +971,10 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li id="menu-item-33"
+                                @* <li id="menu-item-33"
                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33"><a
                                     href="blog/index.html">Bài viết</a>
-                                </li>
+                                </li> *@
                                 @if(!User.Identity.IsAuthenticated){
                                     <li
                                     class="register menu-item menu-item-type-post_type menu-item-object-page">
@@ -987,13 +987,21 @@
                                     </li>
                                 }else{
                                     if(User.FindFirstValue(System.Security.Claims.ClaimTypes.Role) == "2"){
-                                        <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                            <a asp-action="ListUserApply" asp-controller="Company"> Danh sách ứng tuyển</a>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
+                                            <a href="#">Quản lý công ty</a>
+                                            <ul class="sub-menu">
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                                                    <a asp-action="ListUserApply" asp-controller="Company"> Danh sách ứng tuyển</a>
+                                                </li>
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                                                    <a asp-action="JobInCompany" asp-controller="JobClient"> Danh sách công việc</a>
+                                                </li>
+                                            </ul>
                                         </li>
-                                    }                  
-                                    
+                                        
+                                    }                       
                                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
-                                        <a class="navbar-text mr-2">
+                                        <a href="#">
                                             Chào, @User.Identity.Name!
                                         </a>
                                         <ul class="sub-menu">
