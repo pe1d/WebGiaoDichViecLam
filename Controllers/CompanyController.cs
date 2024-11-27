@@ -23,9 +23,18 @@ namespace WebGiaoDichViecLam.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> ListCompany()
+        public async Task<IActionResult> ListCompany(string search_keywords)
         {
-            ViewBag.companies = await _context.tblCompany.ToArrayAsync();
+            var query = _context.tblCompany.AsQueryable();
+
+            if (!string.IsNullOrEmpty(search_keywords))
+            {
+                query = query.Where(c => EF.Functions.Like(c.sNameCompany, $"%{search_keywords}%") ||
+                                         EF.Functions.Like(c.sAddressCompany, $"%{search_keywords}%"));
+            }
+
+            ViewBag.companies = await query.ToListAsync();
+            ViewBag.SearchKeywords = search_keywords; // Để giữ giá trị từ khóa trong input
             return View();
         }
         public async Task<IActionResult> DetailCompany(int id)
